@@ -119,9 +119,10 @@ namespace Tic_Tac_Toe
         /// </summary>
         private void CheckForwinner()
         {
+            #region Horizontal Win
             //check for horizontal win
             //row 0
-            if(mResults[0] != MarkType.Free && (mResults[0] & mResults[1] & mResults[2]) == mResults[0])
+            if (mResults[0] != MarkType.Free && (mResults[0] & mResults[1] & mResults[2]) == mResults[0])
             {
                 //Game ends
                 mGameEnded = true;
@@ -150,7 +151,9 @@ namespace Tic_Tac_Toe
                 Button0_2.Background = Button1_2.Background = Button2_2.Background = Brushes.Green;
             }
 
+            #endregion
 
+            #region Vertical Win
             //check for vertical win
             //column 0
             if (mResults[0] != MarkType.Free && (mResults[0] & mResults[3] & mResults[6]) == mResults[0])
@@ -163,14 +166,46 @@ namespace Tic_Tac_Toe
             }
 
             //column 1
-            if (mResults[0] != MarkType.Free && (mResults[0] & mResults[3] & mResults[6]) == mResults[0])
+            if (mResults[1] != MarkType.Free && (mResults[1] & mResults[4] & mResults[7]) == mResults[1])
             {
                 //Game ends
                 mGameEnded = true;
 
                 //highlight winning cells in green
-                Button0_0.Background = Button0_1.Background = Button0_2.Background = Brushes.Green;
+                Button1_0.Background = Button1_1.Background = Button1_2.Background = Brushes.Green;
             }
+            //column 2
+            if (mResults[2] != MarkType.Free && (mResults[2] & mResults[5] & mResults[8]) == mResults[2])
+            {
+                //Game ends
+                mGameEnded = true;
+
+                //highlight winning cells in green
+                Button2_0.Background = Button2_1.Background = Button2_2.Background = Brushes.Green;
+            }
+            #endregion
+
+            #region Diagonal win
+            //check for diagonal wins
+            // top left to bottom right
+            if (mResults[0] != MarkType.Free && (mResults[0] & mResults[4] & mResults[8]) == mResults[0])
+            {
+                //Game ends
+                mGameEnded = true;
+
+                //highlight winning cells in green
+                Button0_0.Background = Button1_1.Background = Button2_2.Background = Brushes.Green;
+            }
+            //top right to bottom left
+            if (mResults[2] != MarkType.Free && (mResults[2] & mResults[4] & mResults[6]) == mResults[2])
+            {
+                //Game ends
+                mGameEnded = true;
+
+                //highlight winning cells in green
+                Button2_0.Background = Button1_1.Background = Button0_2.Background = Brushes.Green;
+            }
+            #endregion
 
             //check for no winner and all possible move are full
             if (!mResults.Any(f => f == MarkType.Free))
@@ -185,7 +220,7 @@ namespace Tic_Tac_Toe
                     button.Background = Brushes.Orange;
                    
                 });
-
+                MessageBox.Show("Click the Screen to Restart the Game");
 
             }
         }
